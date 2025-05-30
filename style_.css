@@ -1,0 +1,252 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #970e0e;
+}
+
+.gift-container {
+    cursor: pointer;
+}
+
+.gift {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transition: transform 0.5s ease;
+}
+
+.gift:hover {
+    transform: scale(1.05);
+}
+
+.gift-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gift-lid, .gift-bottom {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.gift-lid {
+    height: 40px;
+    top: 0;
+    z-index: 2;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.gift-lid::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #ce0000, #ff1a1a);
+    z-index: 3;
+}
+
+.gift.open .gift-lid {
+    transform: translateY(-20px) scale(0.9);
+    opacity: 0;
+}
+
+.gift-bottom {
+    height: 160px;
+    top: 40px;
+    background: white;
+}
+
+.ribbon-vertical, .ribbon-horizontal {
+    position: absolute;
+    background: linear-gradient(45deg, #ce0000, #ff1a1a);
+    z-index: 3;
+}
+
+.ribbon-vertical {
+    width: 15px;
+    height: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+}
+
+.ribbon-horizontal {
+    width: 100%;
+    height: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    background: linear-gradient(45deg, #ce0000, #ff1a1a);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.5s ease;
+}
+
+.gift:hover .bow {
+    transform: translateX(-50%) scale(1.1);
+}
+
+.gift.open .bow {
+    transform: translateX(-50%) translateY(-20px) scale(0.9);
+    opacity: 0;
+}
+
+.bow::before,
+.bow::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(45deg, #ce0000, #ff1a1a);
+    border-radius: 20px;
+}
+
+.bow::before {
+    left: -15px;
+    transform: rotate(-30deg);
+}
+
+.bow::after {
+    right: -15px;
+    transform: rotate(30deg);
+}
+
+.click-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    bottom: -40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.heart-explosion {
+    position: absolute;
+    font-size: 24px;
+    color: #ff1a1a;
+    opacity: 0;
+    z-index: 1000;
+    user-select: none;
+    pointer-events: none;
+    animation: explode 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.3) translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translate(var(--tx), var(--ty)) rotate(var(--rotate));
+        opacity: 0;
+    }
+}
+
+/* Responsive design for iPhone 12 */
+@media screen and (max-width: 390px), 
+       screen and (max-height: 844px) {
+    .gift {
+        width: 140px;
+        height: 140px;
+    }
+
+    .gift-lid {
+        height: 28px;
+    }
+
+    .gift-bottom {
+        height: 112px;
+        top: 28px;
+    }
+
+    .ribbon-vertical {
+        width: 10px;
+        height: 112px;
+        top: 28px;
+    }
+
+    .ribbon-horizontal {
+        height: 10px;
+    }
+
+    .gift-lid::after {
+        width: 10px;
+    }
+
+    .bow {
+        width: 22px;
+        height: 22px;
+        top: -12px;
+    }
+
+    .bow::before,
+    .bow::after {
+        width: 12px;
+        height: 25px;
+    }
+
+    .bow::before {
+        left: -10px;
+    }
+
+    .bow::after {
+        right: -10px;
+    }
+
+    .click-text {
+        font-size: 14px;
+        bottom: -30px;
+    }
+
+    .heart-explosion {
+        font-size: 18px;
+    }
+}
+
+/* Landscape orientation */
+@media screen and (max-height: 390px) {
+    .gift {
+        width: 120px;
+        height: 120px;
+    }
+
+    .gift-lid {
+        height: 24px;
+    }
+
+    .gift-bottom {
+        height: 96px;
+        top: 24px;
+    }
+
+    .click-text {
+        font-size: 12px;
+        bottom: -25px;
+    }
+}
